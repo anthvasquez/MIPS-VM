@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 project(M4 CXX)
 
-set(CMAKE_PREFIX_PATH /Users/Anthony/Qt5.13.1/5.13.1/clang_64)
+#Add this if CMake is having a hard time finding Qt5
+#set(CMAKE_PREFIX_PATH C:\path\to\Qt5\base)
+
 # add source for any additional non-gui modules here
 set(LIB_SOURCE
   token.hpp token.cpp
@@ -90,8 +92,8 @@ enable_testing()
 add_test(unit_tests unit_tests)
 add_test(ui_tests virtual_machine_gui_test)
 
-# In the reference environment enable coverage on tests
-if(UNIX AND NOT APPLE AND CMAKE_COMPILER_IS_GNUCXX)
+# In the reference environment enable coverage on tests (disabled for now)
+if(FALSE AND UNIX AND NOT APPLE AND CMAKE_COMPILER_IS_GNUCXX)
   message("-- Enabling test coverage")
   set(GCC_COVERAGE_COMPILE_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
   set_target_properties(unit_tests PROPERTIES COMPILE_FLAGS ${GCC_COVERAGE_COMPILE_FLAGS} )
